@@ -22,7 +22,7 @@ export default function BirthdayPage() {
           <p className="text-[10px] sm:text-sm tracking-[0.4em] sm:tracking-[0.5em] uppercase text-coral/80 mb-4 font-semibold">
             Um presente pra voc&ecirc;
           </p>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light italic text-primary-dark mb-4 leading-tight">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light italic text-primary-dark mb-4 leading-tight">
             Feliz Anivers&aacute;rio
           </h1>
           <div className="flex items-center justify-center gap-3 mb-5">
@@ -123,7 +123,7 @@ export default function BirthdayPage() {
 
         {/* Signature */}
         <div className="mt-10 sm:mt-14 text-center relative z-10">
-          <p className="text-xl sm:text-2xl italic text-primary-dark/35 font-light">
+          <p className="font-logo text-3xl sm:text-4xl text-primary-dark/30">
             &ldquo;Seja leve me leve&rdquo;
           </p>
         </div>

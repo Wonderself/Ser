@@ -17,9 +17,7 @@ export default function Header() {
     { href: "/contato", label: "Contato" },
   ];
 
-  // V2 has full-bleed hero photo, so header should be transparent
   const isV2 = pathname === "/v2";
-  // V3 has pistachio background
   const isV3 = pathname === "/v3";
 
   const headerBg = isV2
@@ -45,12 +43,13 @@ export default function Header() {
 
   return (
     <header className={`${headerBg} sticky top-0 z-50`}>
-      <nav className="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
-        <Link href="/" className="flex items-baseline gap-1">
-          <span className={`text-2xl font-light italic tracking-wide ${textColor}`}>
+      <nav className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo - cursive style like the photo */}
+        <Link href="/" className="flex flex-col leading-none">
+          <span className={`font-logo text-3xl ${textColor}`}>
             Leve
           </span>
-          <span className={`text-[10px] tracking-[0.35em] uppercase ${textColor} opacity-70`}>
+          <span className={`text-[9px] tracking-[0.45em] uppercase ${textColor} opacity-60 -mt-1 ml-0.5`}>
             Mente
           </span>
         </Link>
@@ -61,7 +60,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm tracking-wide ${linkColor} transition-colors`}
+              className={`text-xs tracking-[0.1em] uppercase ${linkColor} transition-colors font-medium`}
             >
               {link.label}
             </Link>
