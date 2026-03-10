@@ -1,14 +1,11 @@
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
-import { getProducts, getCategories, getSettings } from "@/lib/data";
-
-export const dynamic = "force-dynamic";
+import { defaultProducts, defaultCategories, defaultSettings } from "@/lib/defaults";
 
 export default function Cardapio() {
-  const products = getProducts();
-  const categories = getCategories().sort((a, b) => a.order - b.order);
-  const settings = getSettings();
-  const whatsappUrl = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent("Olá! Gostaria de fazer uma encomenda!")}`;
+  const products = defaultProducts;
+  const categories = [...defaultCategories].sort((a, b) => a.order - b.order);
+  const whatsappUrl = `https://wa.me/${defaultSettings.whatsapp}?text=${encodeURIComponent("Olá! Gostaria de fazer uma encomenda!")}`;
 
   return (
     <div className="pt-8 pb-20">

@@ -7,15 +7,11 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({ products: 0, categories: 0, bio: 0 });
 
   useEffect(() => {
-    Promise.all([
-      fetch("/api/products").then((r) => r.json()),
-      fetch("/api/categories").then((r) => r.json()),
-      fetch("/api/bio").then((r) => r.json()),
-    ]).then(([products, categories, bio]) => {
+    import("@/lib/store").then(({ getProducts, getCategories, getBio }) => {
       setStats({
-        products: products.length,
-        categories: categories.length,
-        bio: bio.length,
+        products: getProducts().length,
+        categories: getCategories().length,
+        bio: getBio().length,
       });
     });
   }, []);

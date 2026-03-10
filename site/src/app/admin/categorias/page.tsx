@@ -1,13 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import * as store from "@/lib/store";
 
-interface Category {
-  id: string;
-  name: string;
-  subtitle: string;
-  order: number;
-}
+type Category = store.Category;
 
 export default function AdminCategorias() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -18,34 +14,26 @@ export default function AdminCategorias() {
     fetchData();
   }, []);
 
-  async function fetchData() {
-    const data = await fetch("/api/categories").then((r) => r.json());
-    setCategories(data.sort((a: Category, b: Category) => a.order - b.order));
+  function fetchData() {
+    setCategories(store.getCategories().sort((a, b) => a.order - b.order));
   }
 
-  async function handleSave() {
+  function handleSave() {
     if (!editing) return;
+    const all = store.getCategories();
     if (isNew) {
-      await fetch("/api/categories", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editing),
-      });
+      store.setCategories([...all, { ...editing, id: editing.id || Date.now().toString() }]);
     } else {
-      await fetch("/api/categories", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editing),
-      });
+      store.setCategories(all.map((c) => (c.id === editing.id ? editing : c)));
     }
     setEditing(null);
     setIsNew(false);
     fetchData();
   }
 
-  async function handleDelete(id: string) {
+  function handleDelete(id: string) {
     if (!confirm("Tem certeza? Os produtos desta categoria não serão excluídos.")) return;
-    await fetch(`/api/categories?id=${id}`, { method: "DELETE" });
+    store.setCategories(store.getCategories().filter((c) => c.id !== id));
     fetchData();
   }
 

@@ -1,11 +1,9 @@
 import Image from "next/image";
-import { getBio, getSettings } from "@/lib/data";
-
-export const dynamic = "force-dynamic";
+import { defaultBio, defaultSettings } from "@/lib/defaults";
 
 export default function BioPage() {
-  const sections = getBio().sort((a, b) => a.order - b.order);
-  const settings = getSettings();
+  const sections = [...defaultBio].sort((a, b) => a.order - b.order);
+  const settings = defaultSettings;
 
   return (
     <div className="pt-8 pb-20">

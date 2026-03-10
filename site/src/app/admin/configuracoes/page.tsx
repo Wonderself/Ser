@@ -2,52 +2,31 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import * as s from "@/lib/store";
 
-interface SiteSettings {
-  siteName: string;
-  tagline: string;
-  slogan: string;
-  description: string;
-  whatsapp: string;
-  instagram: string;
-  email: string;
-  logoUrl: string;
-  locations: string[];
-}
+type SiteSettings = s.SiteSettings;
 
 export default function AdminConfiguracoes() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [saved, setSaved] = useState(false);
-  const [uploading, setUploading] = useState(false);
   const [newLocation, setNewLocation] = useState("");
 
   useEffect(() => {
-    fetch("/api/settings")
-      .then((r) => r.json())
-      .then(setSettings);
+    setSettings(s.getSettings());
   }, []);
 
-  async function handleSave() {
+  function handleSave() {
     if (!settings) return;
-    await fetch("/api/settings", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(settings),
-    });
+    s.setSettings(settings);
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   }
 
-  async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file || !settings) return;
-    setUploading(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await fetch("/api/upload", { method: "POST", body: formData });
-    const { url } = await res.json();
+    const url = URL.createObjectURL(file);
     setSettings({ ...settings, logoUrl: url });
-    setUploading(false);
   }
 
   if (!settings) return <div className="text-gray-500">Carregando...</div>;
@@ -82,7 +61,7 @@ export default function AdminConfiguracoes() {
             )}
             <div>
               <label className="bg-primary-dark text-cream px-4 py-2 rounded-lg text-sm cursor-pointer hover:bg-primary transition-colors">
-                {uploading ? "Enviando..." : "Fazer Upload do Logo"}
+                Fazer Upload do Logo
                 <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
               </label>
               {settings.logoUrl && (

@@ -2,78 +2,52 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import * as store from "@/lib/store";
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  categoryId: string;
-  order: number;
-}
-
-interface Category {
-  id: string;
-  name: string;
-}
+type Product = store.Product;
+type Category = store.Category;
 
 export default function AdminProdutos() {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [editing, setEditing] = useState<Product | null>(null);
   const [isNew, setIsNew] = useState(false);
-  const [uploading, setUploading] = useState(false);
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  async function fetchData() {
-    const [prods, cats] = await Promise.all([
-      fetch("/api/products").then((r) => r.json()),
-      fetch("/api/categories").then((r) => r.json()),
-    ]);
-    setProducts(prods);
-    setCategories(cats);
+  function fetchData() {
+    setProducts(store.getProducts());
+    setCategories(store.getCategories());
   }
 
-  async function handleSave() {
+  function handleSave() {
     if (!editing) return;
+    const all = store.getProducts();
     if (isNew) {
-      await fetch("/api/products", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editing),
-      });
+      const newP = { ...editing, id: Date.now().toString(), order: all.length };
+      store.setProducts([...all, newP]);
     } else {
-      await fetch("/api/products", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editing),
-      });
+      store.setProducts(all.map((p) => (p.id === editing.id ? editing : p)));
     }
     setEditing(null);
     setIsNew(false);
     fetchData();
   }
 
-  async function handleDelete(id: string) {
+  function handleDelete(id: string) {
     if (!confirm("Tem certeza que deseja excluir este produto?")) return;
-    await fetch(`/api/products?id=${id}`, { method: "DELETE" });
+    store.setProducts(store.getProducts().filter((p) => p.id !== id));
     fetchData();
   }
 
-  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file || !editing) return;
-    setUploading(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await fetch("/api/upload", { method: "POST", body: formData });
-    const { url } = await res.json();
+    const url = URL.createObjectURL(file);
     setEditing({ ...editing, image: url });
-    setUploading(false);
   }
 
   const filtered = filter
@@ -177,7 +151,7 @@ export default function AdminProdutos() {
                     className="flex-1 px-3 py-2 border rounded-lg text-sm"
                   />
                   <label className="bg-gray-100 px-3 py-2 rounded-lg text-sm cursor-pointer hover:bg-gray-200 transition-colors">
-                    {uploading ? "..." : "Upload"}
+                    Upload
                     <input type="file" accept="image/*" className="hidden" onChange={handleUpload} />
                   </label>
                 </div>

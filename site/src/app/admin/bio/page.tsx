@@ -2,66 +2,47 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import * as store from "@/lib/store";
 
-interface BioSection {
-  id: string;
-  title: string;
-  content: string;
-  image: string;
-  order: number;
-}
+type BioSection = store.BioSection;
 
 export default function AdminBio() {
   const [sections, setSections] = useState<BioSection[]>([]);
   const [editing, setEditing] = useState<BioSection | null>(null);
   const [isNew, setIsNew] = useState(false);
-  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  async function fetchData() {
-    const data = await fetch("/api/bio").then((r) => r.json());
-    setSections(data.sort((a: BioSection, b: BioSection) => a.order - b.order));
+  function fetchData() {
+    setSections(store.getBio().sort((a, b) => a.order - b.order));
   }
 
-  async function handleSave() {
+  function handleSave() {
     if (!editing) return;
+    const all = store.getBio();
     if (isNew) {
-      await fetch("/api/bio", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editing),
-      });
+      store.setBio([...all, { ...editing, id: Date.now().toString() }]);
     } else {
-      await fetch("/api/bio", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editing),
-      });
+      store.setBio(all.map((b) => (b.id === editing.id ? editing : b)));
     }
     setEditing(null);
     setIsNew(false);
     fetchData();
   }
 
-  async function handleDelete(id: string) {
+  function handleDelete(id: string) {
     if (!confirm("Tem certeza que deseja excluir esta seção?")) return;
-    await fetch(`/api/bio?id=${id}`, { method: "DELETE" });
+    store.setBio(store.getBio().filter((b) => b.id !== id));
     fetchData();
   }
 
-  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file || !editing) return;
-    setUploading(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await fetch("/api/upload", { method: "POST", body: formData });
-    const { url } = await res.json();
+    const url = URL.createObjectURL(file);
     setEditing({ ...editing, image: url });
-    setUploading(false);
   }
 
   return (
@@ -124,7 +105,7 @@ export default function AdminBio() {
                     className="flex-1 px-3 py-2 border rounded-lg text-sm"
                   />
                   <label className="bg-gray-100 px-3 py-2 rounded-lg text-sm cursor-pointer hover:bg-gray-200">
-                    {uploading ? "..." : "Upload"}
+                    Upload
                     <input type="file" accept="image/*" className="hidden" onChange={handleUpload} />
                   </label>
                 </div>
