@@ -421,119 +421,84 @@ function GiftBox({ phase }: { phase: "idle" | "shake" | "glow" | "open" | "burst
             </div>
           </div>
 
-          {/* ══════════ SATIN BOW ══════════
-              Fixed min(px,vw) sizing — NOT percentage of lid height!
-              Positioned just above lid. */}
+          {/* ══════════ SATIN BOW ══════════ */}
           <div
             className="absolute left-1/2 -translate-x-1/2"
             style={{
-              bottom: "min(56px, 15vw)",
-              width: "min(130px, 44vw)",
-              height: "min(88px, 29vw)",
+              bottom: "min(48px, 12.5vw)",
+              width: "min(110px, 36vw)",
+              height: "min(52px, 17vw)",
             }}
           >
-            {/* Bow shadow cast on lid */}
-            <div className="absolute left-[20%] right-[20%] bottom-[-12%] h-[18%]" style={{
+            {/* Bow shadow on lid */}
+            <div className="absolute left-[10%] right-[10%] bottom-[-10%] h-[16%]" style={{
               background: "radial-gradient(ellipse, rgba(0,0,0,0.18), transparent 70%)",
-              filter: "blur(5px)",
+              filter: "blur(4px)",
             }} />
 
-            {/* Left satin loop — large elliptical shape */}
-            <div
-              className="absolute"
-              style={{
-                right: "38%",
-                top: "5%",
-                width: "72%",
-                height: "68%",
-                borderRadius: "50% 48% 42% 50% / 52% 70% 30% 48%",
-                background: `linear-gradient(140deg,
-                  #ffe8a8 0%, #f5d680 18%, #e8c060 35%,
-                  #d4a040 52%, #c49020 68%, #a88020 82%, #8b6914 100%)`,
-                boxShadow: `
-                  inset 4px 4px 12px rgba(255,255,255,0.4),
-                  inset -3px -3px 8px rgba(0,0,0,0.15),
-                  0 4px 14px rgba(0,0,0,0.3)
-                `,
-                transform: "rotate(-18deg)",
-              }}
-            >
+            {/* Left loop */}
+            <div className="absolute" style={{
+              right: "46%",
+              top: "5%",
+              width: "56%",
+              height: "78%",
+              borderRadius: "48% 50% 50% 48% / 50%",
+              background: `linear-gradient(145deg,
+                #ffe8a8 0%, #f5d680 22%, #e8c060 42%,
+                #d4a040 62%, #c49020 80%, #a88020 100%)`,
+              boxShadow: `
+                inset 3px 2px 8px rgba(255,255,255,0.35),
+                inset -2px -2px 5px rgba(0,0,0,0.12),
+                0 3px 8px rgba(0,0,0,0.2)
+              `,
+              transform: "rotate(-12deg)",
+            }}>
               <div className="absolute inset-0 rounded-[inherit]" style={{
-                background: "radial-gradient(ellipse 55% 45% at 32% 25%, rgba(255,255,255,0.5), transparent 60%)",
+                background: "radial-gradient(ellipse 45% 40% at 38% 32%, rgba(255,255,255,0.4), transparent 60%)",
               }} />
             </div>
 
-            {/* Right satin loop — mirror */}
-            <div
-              className="absolute"
-              style={{
-                left: "38%",
-                top: "5%",
-                width: "72%",
-                height: "68%",
-                borderRadius: "48% 50% 50% 42% / 70% 52% 48% 30%",
-                background: `linear-gradient(220deg,
-                  #ffe8a8 0%, #f5d680 18%, #e8c060 35%,
-                  #d4a040 52%, #c49020 68%, #a88020 82%, #8b6914 100%)`,
-                boxShadow: `
-                  inset -4px 4px 12px rgba(255,255,255,0.4),
-                  inset 3px -3px 8px rgba(0,0,0,0.15),
-                  0 4px 14px rgba(0,0,0,0.3)
-                `,
-                transform: "rotate(18deg)",
-              }}
-            >
+            {/* Right loop */}
+            <div className="absolute" style={{
+              left: "46%",
+              top: "5%",
+              width: "56%",
+              height: "78%",
+              borderRadius: "50% 48% 48% 50% / 50%",
+              background: `linear-gradient(215deg,
+                #ffe8a8 0%, #f5d680 22%, #e8c060 42%,
+                #d4a040 62%, #c49020 80%, #a88020 100%)`,
+              boxShadow: `
+                inset -3px 2px 8px rgba(255,255,255,0.35),
+                inset 2px -2px 5px rgba(0,0,0,0.12),
+                0 3px 8px rgba(0,0,0,0.2)
+              `,
+              transform: "rotate(12deg)",
+            }}>
               <div className="absolute inset-0 rounded-[inherit]" style={{
-                background: "radial-gradient(ellipse 55% 45% at 68% 25%, rgba(255,255,255,0.5), transparent 60%)",
+                background: "radial-gradient(ellipse 45% 40% at 62% 32%, rgba(255,255,255,0.4), transparent 60%)",
               }} />
             </div>
-
-            {/* Left ribbon tail */}
-            <div className="absolute" style={{
-              left: "16%",
-              bottom: "-32%",
-              width: "13%",
-              height: "58%",
-              background: `linear-gradient(90deg, #8b6914, #c49020 30%, #e8b84c 50%, #c49020 70%, #a88020)`,
-              borderRadius: "2px 2px 30% 60%",
-              transform: "rotate(-28deg)",
-              boxShadow: "2px 3px 8px rgba(0,0,0,0.3)",
-            }} />
-
-            {/* Right ribbon tail */}
-            <div className="absolute" style={{
-              right: "16%",
-              bottom: "-32%",
-              width: "13%",
-              height: "58%",
-              background: `linear-gradient(90deg, #a88020, #c49020 30%, #e8b84c 50%, #c49020 70%, #8b6914)`,
-              borderRadius: "2px 2px 60% 30%",
-              transform: "rotate(28deg)",
-              boxShadow: "-2px 3px 8px rgba(0,0,0,0.3)",
-            }} />
 
             {/* Center knot */}
             <div className="absolute left-1/2 -translate-x-1/2 z-10" style={{
-              top: "22%", width: "30%", height: "50%",
+              top: "18%",
+              width: "18%",
+              height: "58%",
             }}>
               <div className="absolute inset-0" style={{
-                borderRadius: "38% 38% 42% 42%",
-                background: `radial-gradient(circle at 36% 28%,
-                  #fff8e0 0%, #ffe4a0 12%, #f5d680 28%, #e8c060 42%,
-                  #d4a040 58%, #a88020 78%, #8b6914 100%)`,
+                borderRadius: "50%",
+                background: `radial-gradient(circle at 42% 36%,
+                  #fff8e0 0%, #f5d680 28%, #e8c060 48%,
+                  #d4a040 66%, #a88020 85%, #8b6914 100%)`,
                 boxShadow: `
-                  0 3px 12px rgba(0,0,0,0.4),
-                  0 0 20px rgba(255,215,0,0.3),
-                  inset 0 2px 3px rgba(255,255,255,0.5)
+                  0 2px 6px rgba(0,0,0,0.3),
+                  inset 0 1px 2px rgba(255,255,255,0.45)
                 `,
               }} />
               <div className="absolute rounded-full" style={{
-                top: "10%", left: "16%", width: "42%", height: "34%",
-                background: "radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.75), transparent 75%)",
-              }} />
-              {/* Fold line */}
-              <div className="absolute left-[28%] top-[48%] w-[44%] h-px rotate-[-8deg]" style={{
-                background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent)",
+                top: "16%", left: "22%", width: "32%", height: "28%",
+                background: "radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.55), transparent 68%)",
               }} />
             </div>
           </div>
