@@ -182,10 +182,11 @@ function GiftBox({ phase }: { phase: "idle" | "shake" | "glow" | "open" | "burst
   const isOpening = isOpen || isBurst;
 
   // How far the lid lifts
+  // max() with negatives = less negative = caps the upward movement
   const lidTransform = isOpen
-    ? "translateY(min(-110px, -30vw)) rotateX(-15deg) scale(1.02)"
+    ? "translateY(max(-110px, -30vw)) rotateX(-15deg) scale(1.02)"
     : isBurst
-      ? "translateY(min(-200px, -50vw)) rotateX(-30deg) scale(0.3)"
+      ? "translateY(max(-200px, -50vw)) rotateX(-30deg) scale(0.3)"
       : "translateY(0) rotateX(0deg) scale(1)";
 
   return (
@@ -399,7 +400,7 @@ function GiftBox({ phase }: { phase: "idle" | "shake" | "glow" | "open" | "burst
         </div>
 
         {/* ── Center jewel at ribbon crossing ── */}
-        <div className="absolute left-1/2 z-10 -translate-x-1/2" style={{ top: "38.5%", width: "15%", paddingBottom: "15%" }}>
+        <div className="absolute left-1/2 z-10 -translate-x-1/2" style={{ top: "41.5%", width: "15%", paddingBottom: "15%" }}>
           {/* Outer glow */}
           <div
             className="absolute inset-[-30%] rounded-full"
