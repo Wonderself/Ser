@@ -425,106 +425,106 @@ function GiftBox({ phase }: { phase: "idle" | "shake" | "glow" | "open" | "burst
           <div
             className="absolute left-1/2 -translate-x-1/2"
             style={{
-              bottom: "min(52px, 14vw)",
-              width: "min(120px, 40vw)",
-              height: "min(60px, 20vw)",
+              bottom: "min(50px, 13vw)",
+              width: "min(110px, 36vw)",
+              height: "min(55px, 18vw)",
             }}
           >
             {/* Bow shadow on lid */}
-            <div className="absolute left-[15%] right-[15%] bottom-[-15%] h-[20%]" style={{
-              background: "radial-gradient(ellipse, rgba(0,0,0,0.2), transparent 70%)",
+            <div className="absolute left-[10%] right-[10%] bottom-[-10%] h-[16%]" style={{
+              background: "radial-gradient(ellipse, rgba(0,0,0,0.18), transparent 70%)",
               filter: "blur(4px)",
             }} />
 
             {/* Left loop */}
             <div className="absolute" style={{
-              right: "48%",
-              top: "8%",
-              width: "55%",
-              height: "80%",
-              borderRadius: "50%",
-              background: `linear-gradient(135deg,
-                #ffe8a8 0%, #f5d680 20%, #e8c060 40%,
-                #d4a040 60%, #c49020 80%, #a88020 100%)`,
+              right: "46%",
+              top: "5%",
+              width: "56%",
+              height: "78%",
+              borderRadius: "48% 50% 50% 48% / 50%",
+              background: `linear-gradient(145deg,
+                #ffe8a8 0%, #f5d680 22%, #e8c060 42%,
+                #d4a040 62%, #c49020 80%, #a88020 100%)`,
               boxShadow: `
-                inset 3px 3px 8px rgba(255,255,255,0.35),
-                inset -2px -2px 6px rgba(0,0,0,0.15),
-                0 3px 10px rgba(0,0,0,0.25)
+                inset 3px 2px 8px rgba(255,255,255,0.35),
+                inset -2px -2px 5px rgba(0,0,0,0.12),
+                0 3px 8px rgba(0,0,0,0.2)
               `,
-              transform: "rotate(-10deg)",
+              transform: "rotate(-12deg)",
             }}>
               <div className="absolute inset-0 rounded-[inherit]" style={{
-                background: "radial-gradient(ellipse 50% 40% at 35% 30%, rgba(255,255,255,0.45), transparent 60%)",
+                background: "radial-gradient(ellipse 45% 40% at 38% 32%, rgba(255,255,255,0.4), transparent 60%)",
               }} />
             </div>
 
             {/* Right loop */}
             <div className="absolute" style={{
-              left: "48%",
-              top: "8%",
-              width: "55%",
-              height: "80%",
-              borderRadius: "50%",
-              background: `linear-gradient(225deg,
-                #ffe8a8 0%, #f5d680 20%, #e8c060 40%,
-                #d4a040 60%, #c49020 80%, #a88020 100%)`,
+              left: "46%",
+              top: "5%",
+              width: "56%",
+              height: "78%",
+              borderRadius: "50% 48% 48% 50% / 50%",
+              background: `linear-gradient(215deg,
+                #ffe8a8 0%, #f5d680 22%, #e8c060 42%,
+                #d4a040 62%, #c49020 80%, #a88020 100%)`,
               boxShadow: `
-                inset -3px 3px 8px rgba(255,255,255,0.35),
-                inset 2px -2px 6px rgba(0,0,0,0.15),
-                0 3px 10px rgba(0,0,0,0.25)
+                inset -3px 2px 8px rgba(255,255,255,0.35),
+                inset 2px -2px 5px rgba(0,0,0,0.12),
+                0 3px 8px rgba(0,0,0,0.2)
               `,
-              transform: "rotate(10deg)",
+              transform: "rotate(12deg)",
             }}>
               <div className="absolute inset-0 rounded-[inherit]" style={{
-                background: "radial-gradient(ellipse 50% 40% at 65% 30%, rgba(255,255,255,0.45), transparent 60%)",
+                background: "radial-gradient(ellipse 45% 40% at 62% 32%, rgba(255,255,255,0.4), transparent 60%)",
               }} />
             </div>
 
-            {/* Left ribbon tail */}
+            {/* Left ribbon tail — hangs from center */}
             <div className="absolute" style={{
-              left: "18%",
-              bottom: "-40%",
-              width: "12%",
-              height: "55%",
+              left: "34%",
+              bottom: "-45%",
+              width: "11%",
+              height: "60%",
               background: `linear-gradient(90deg, #8b6914, #c49020 40%, #e8b84c 55%, #c49020 70%, #a88020)`,
-              borderRadius: "2px 2px 4px 40%",
-              transform: "rotate(-22deg)",
+              borderRadius: "2px 2px 3px 45%",
+              transform: "rotate(-18deg)",
               transformOrigin: "top center",
-              boxShadow: "1px 2px 6px rgba(0,0,0,0.25)",
+              boxShadow: "1px 2px 5px rgba(0,0,0,0.22)",
             }} />
 
-            {/* Right ribbon tail */}
+            {/* Right ribbon tail — hangs from center */}
             <div className="absolute" style={{
-              right: "18%",
-              bottom: "-40%",
-              width: "12%",
-              height: "55%",
+              right: "34%",
+              bottom: "-45%",
+              width: "11%",
+              height: "60%",
               background: `linear-gradient(90deg, #a88020, #c49020 30%, #e8b84c 45%, #c49020 60%, #8b6914)`,
-              borderRadius: "2px 2px 40% 4px",
-              transform: "rotate(22deg)",
+              borderRadius: "2px 2px 45% 3px",
+              transform: "rotate(18deg)",
               transformOrigin: "top center",
-              boxShadow: "-1px 2px 6px rgba(0,0,0,0.25)",
+              boxShadow: "-1px 2px 5px rgba(0,0,0,0.22)",
             }} />
 
             {/* Center knot */}
             <div className="absolute left-1/2 -translate-x-1/2 z-10" style={{
-              top: "15%",
-              width: "20%",
-              height: "65%",
+              top: "18%",
+              width: "18%",
+              height: "58%",
             }}>
               <div className="absolute inset-0" style={{
                 borderRadius: "50%",
-                background: `radial-gradient(circle at 40% 35%,
-                  #fff8e0 0%, #f5d680 25%, #e8c060 45%,
-                  #d4a040 65%, #a88020 85%, #8b6914 100%)`,
+                background: `radial-gradient(circle at 42% 36%,
+                  #fff8e0 0%, #f5d680 28%, #e8c060 48%,
+                  #d4a040 66%, #a88020 85%, #8b6914 100%)`,
                 boxShadow: `
-                  0 2px 8px rgba(0,0,0,0.35),
-                  inset 0 1px 2px rgba(255,255,255,0.5)
+                  0 2px 6px rgba(0,0,0,0.3),
+                  inset 0 1px 2px rgba(255,255,255,0.45)
                 `,
               }} />
               <div className="absolute rounded-full" style={{
-                top: "15%", left: "20%", width: "35%", height: "30%",
-                background: "radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.6), transparent 70%)",
+                top: "16%", left: "22%", width: "32%", height: "28%",
+                background: "radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.55), transparent 68%)",
               }} />
             </div>
           </div>
