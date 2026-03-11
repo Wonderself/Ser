@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@100;200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@100;200;300;400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme inline {
@@ -45,7 +45,7 @@ html {
 
 /* Logo font */
 .font-logo {
-  font-family: "Great Vibes", cursive;
+  font-family: "Allura", cursive;
 }
 
 .font-display {
