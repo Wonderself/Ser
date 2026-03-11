@@ -425,9 +425,9 @@ function GiftBox({ phase }: { phase: "idle" | "shake" | "glow" | "open" | "burst
           <div
             className="absolute left-1/2 -translate-x-1/2"
             style={{
-              bottom: "min(50px, 13vw)",
+              bottom: "min(48px, 12.5vw)",
               width: "min(110px, 36vw)",
-              height: "min(55px, 18vw)",
+              height: "min(52px, 17vw)",
             }}
           >
             {/* Bow shadow on lid */}
@@ -479,32 +479,6 @@ function GiftBox({ phase }: { phase: "idle" | "shake" | "glow" | "open" | "burst
                 background: "radial-gradient(ellipse 45% 40% at 62% 32%, rgba(255,255,255,0.4), transparent 60%)",
               }} />
             </div>
-
-            {/* Left ribbon tail — hangs from center */}
-            <div className="absolute" style={{
-              left: "34%",
-              bottom: "-45%",
-              width: "11%",
-              height: "60%",
-              background: `linear-gradient(90deg, #8b6914, #c49020 40%, #e8b84c 55%, #c49020 70%, #a88020)`,
-              borderRadius: "2px 2px 3px 45%",
-              transform: "rotate(-18deg)",
-              transformOrigin: "top center",
-              boxShadow: "1px 2px 5px rgba(0,0,0,0.22)",
-            }} />
-
-            {/* Right ribbon tail — hangs from center */}
-            <div className="absolute" style={{
-              right: "34%",
-              bottom: "-45%",
-              width: "11%",
-              height: "60%",
-              background: `linear-gradient(90deg, #a88020, #c49020 30%, #e8b84c 45%, #c49020 60%, #8b6914)`,
-              borderRadius: "2px 2px 45% 3px",
-              transform: "rotate(18deg)",
-              transformOrigin: "top center",
-              boxShadow: "-1px 2px 5px rgba(0,0,0,0.22)",
-            }} />
 
             {/* Center knot */}
             <div className="absolute left-1/2 -translate-x-1/2 z-10" style={{
